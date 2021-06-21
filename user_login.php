@@ -23,8 +23,9 @@ if(isset($_POST['login'])){
     
 		header('location: overview.php');
 	}else{
-
-		header('location: user_login.php');
+    echo "<script>alert('Credentials are invalid. Please make sure that your credentials are correct. ');
+    window.location.href='user_login.php'</script>";
+		
 	}
 
   $sql->close();
