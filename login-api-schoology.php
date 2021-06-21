@@ -35,7 +35,7 @@
   for($i = 0; $i < $no_of_tasks_to_generate; $i++) {
     $source_generated_index = rand(0, 1);
     $type_generated_index = rand(0, 1);
-    $subject_generated_index = rand(0, 4);
+    $subject_generated_index = rand(0, 5);
 
     $task_name = $subjects[$subject_generated_index]." ".$task_type_name[$type_generated_index]." #".($task_no_start++);
     $task_description = "<p>Task is imported from: <span class='badge badge-primary'>Schoology</span><br>This task is auto-generated. Actual data will be fetched from real sources, but will be implemented soon when resources are available.";

@@ -12,9 +12,9 @@
   $username = $_SESSION["email"];
 
   // Parse configuration file
-  $config = parse_ini_file("../config1.ini");
+  $config = parse_ini_file("../config.ini");
 
-  // Generate random schoology tasks
+  // Generate random edmodo tasks
 
   /* HARDCODED ATTRIBUTES */
   $subjects = ['DAA', 'ArtApp', 'PolGov', 'Ecosystem'];
