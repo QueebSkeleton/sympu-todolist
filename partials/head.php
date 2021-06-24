@@ -27,4 +27,40 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
+
+
+  <style>
+    #header-branding{
+      border-bottom:  none;
+        border-bottom-width: initial;
+        border-bottom-style: none;
+        border-bottom-color: initial;
+      margin:  0 -9999rem;
+      padding:  0.25rem 9999rem;
+      background:  #0677ba;
+    }
+
+    #login-container .login-content {
+    border:  1px solid; 
+    padding: 19px 30px 25px;
+    background: #f8f8ff;
+    margin-bottom: 3px;
+    animation:  shadow-move 5s infinite;
+    }
+
+    @keyframes shadow-move{
+      25% {box-shadow: 5px 10px #888888;}
+      75% {box-shadow: 5px 10px #000000;}
+    }
+
+
+    .statusmsg{
+    font-size: 12px; 
+    padding: 3px;
+    background: #EDEDED;
+    border: 1px solid #DFDFDF; 
+    }
+  </style>
+  
 </head>
