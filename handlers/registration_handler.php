@@ -1,7 +1,7 @@
 <?php
 
 #database/config.ini access
-$config = parse_ini_file('../config.ini');
+$config = parse_ini_file('../../config.ini');
 $connect = new mysqli($config['db_server'], $config['db_user'], $config['db_password'], $config['db_name']);
 
 
