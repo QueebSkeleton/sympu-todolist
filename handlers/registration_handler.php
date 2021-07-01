@@ -15,7 +15,7 @@ $password=$_POST['password'];
   $connect->query($sql);
 
   echo "<script>alert('Registration success! Please log-in using your saved credentials. Redirecting you back now.');
-    window.location.href= 'user_login.php';
+    window.location.href= '../user_login.php';
     </script>";
              
 ?>
