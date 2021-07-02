@@ -107,7 +107,7 @@ include("partials/head.php");
                 <div class="row mb-2">
                   <div class="col-md-2 "><label for="name">Workhours:</label></div>
                   <div class="col-md-8">
-                    <input type="text" readonly class="form-control" id="name" value="<?= $row['first_name'].' '.$row['last_name'] ?>">
+                    <input type="text" readonly class="form-control" id="name" value="<?= $row['work_hours'] ?>">
                   </div>
                   <div class="col-md-2">
                     <a href="update_work_hours.php" class="btn btn-primary">
