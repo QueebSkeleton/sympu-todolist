@@ -47,19 +47,25 @@
         <form class="form-horizontal" method="POST" action="handlers/change_password_handler.php">
           <div class="card-body">
 
-            <div class="form-group">
+            <div class="form-row mb-4">
               <label class="col-sm-2 col-form-label">Current</label>
-              <input type="password" name="current_password">
+              <div class="col-sm-10">
+                <input type="password" name="current_password" class="form-control">
+              </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-row mb-4">
               <label class="col-sm-2 col-form-label">New</label>
-              <input type="password" min='6' max='16' name="new_password">
+              <div class="col-sm-10">
+                <input type="password" min='6' max='16' name="new_password" class="form-control">
+              </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-row mb-4">
               <label class="col-sm-2 col-form-label">Re-type new</label>
-              <input type="password" min='6' max='16' name="retype_new">
+              <div class="col-sm-10">
+                <input type="password" min='6' max='16' name="retype_new" class="form-control">
+              </div>
             </div>
 
 
@@ -67,7 +73,9 @@
             <div class="form-group row">
               <div class="offset-sm-2 col-sm-10">
                 <div class="col mb-2">
-                  <button type="submit" class="btn btn-primary">Confirm</button><a href="profile.php" class="btn btn-danger">Back</a>
+                  <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Confirm</button><a href="profile.php" class="btn btn-danger">Back</a>
+                  </div>
                 </div>
               </div>
             </div>
