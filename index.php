@@ -1,167 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+				
+				<meta charset ="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				
+				<title>Landing Page</title>
+				
+				<link rel="stylesheet" href="style.css">
+				
+				<link rel="preconnect" href="https://fonts.gstatic.com">
+				<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+				
+				<link rel="preconnect" href="https://fonts.gstatic.com">
+				<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+				<!-- Header Navbar -->
+				<div class="ClsTHeader">
+				<div class="ClsContainer">
+						<div class="ClsNavbar">
+								<div class="ClsLogo">
+												
+												<!-- Website Logo -->
+												<img src="Images/HypnosLogoV2.png" width="125px">
+								</div>
+							  <nav>
+							  				<ul id="MenuButtons">
+							  						<li><a href="user_register.php" class="BtnSignUp">Sign Up</a></li>
+							  						<li><a href="user_login.php" class="BtnLogin">Login</a></li>
+							  				</ul>
+							  </nav>
+							  				
+							  				<p class="BtnMenu" onclick="MenuToggle()">Menu</p>
+				        </div>
+						</div>
+				</div>
+				
+				<!-- Page Image Bg -->
+				<div class="ClsPageImage">
+					<div class="ClsContainer">
+						<div class="row">
+							<div class="col col1">
+									<h1>Slogan</h1>
+									<p>lorem kdlsiskskksksk kdkmsmsmwmw jjddjdmmw kxkdkwksdnndkdkdkdk kdkdk</p>
+									
+									<a href="" class="ClsBtn">Explore &#10148;</a>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+				<!-- goal -->
+				<div class="GoalDiv">
+						<div class="ClsContainer">
+								<h1 class="PTitle">Our Goal</h1>
+										<img src="images/GoalIcon.png" width="200px" class="Icon">
+								<p>
+									    Our main objective is to make a centralized program where users can collect and organize all incoming events (incoming online meetings, online quizzes, activities, etc.) from different platforms, and enable users to follow a generated and suggested schedule for performing the tasks. Our website is specifically tailored for students, especially those who are in an online mode of learning but nevertheless, it can be used by anybody who is interested.
 
-<?php
-  include("partials/head.php");
-?>
-
-
-<body class="hold-transition sidebar-mini">
-
-<div class="wrapper">
-
-   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="dist/img/smile.png" alt="SYMPU-List Logo" height="100" width="100">
-  </div>
-
-  <?php include("partials/headnav.php"); ?>
-
-  <?php include("partials/sidebar.php"); ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Calendar</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Calendar</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-            <!-- TODO: Insert Calendar Plugin Here -->
-            <div class="col-lg-12">
-              #
-              #
-              #
-              #
-              #
-              #
-              #
-              #
-              <h1> Calendar Plugin here </h1>
-              #
-              #
-              #
-              #
-              #
-              #
-              #
-              #
-            </div>
-          </div>
-
-            <!--- Event Form Starts -->
-            <!--- El's Note: Ill just set this as a card here below the calendar as I dont know if this part is implemented as a pop up (once a button is clicked) or just here below the calendar-->
-        
-          <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Create Event</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <form>
-
-                  <!--Task/Event Title-->
-                  <div class="row">
-                    <div class="col-sm-6" id="task_title">
-                    <!-- text input -->
-                      <div class="form-group">
-                        <label>Title of Event</label>
-                        <input type="text" class="form-control" placeholder="Enter title for event">
-                      </div>
-                    </div>
-                  </div>
-
-                  <!--Task Description-->
-                  <div class="row" id="description">
-                    <div class="col-sm-6" id="task_description">
-                      <div class="form-group">
-                          <label>Description</label>
-                          <textarea class="form-control" rows="7" cols="250" placeholder="Add additional details for this event..."></textarea>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!--Due Date of Task -->
-
-
-                  <!--Type --> 
-                  <div class="col-sm-4 form-group">
-                    <label>Select Type</label>
-                        <select class="form-control">
-                          <option>Assignment</option>
-                          <option>Online Meeting</option>
-                          <option>Quiz</option>
-                        </select>    
-                  </div>
-
-                  <!-- Additional Settings -->
-                  <div class="col-sm-4 form-group">
-                    <label>Set Priority</label>
-                    <div class="form-check">
-                          <input class="form-check-input" type="radio" name="1-LesserImportance">
-                          <label class="form-check-label">Of Lesser Importance</label>
-                    </div>
-                    <div class="form-check">
-                          <input class="form-check-input" type="radio" name="2-Important">
-                          <label class="form-check-label">Important</label>
-                    </div>
-                    <div class="form-check">
-                          <input class="form-check-input" type="radio" name="3-AtMostImportant">
-                          <label class="form-check-label">At Most Important (URGENT)</label>
-                    </div>
-                  </div>
-                  
-                  
-
-                </form>
-              </div><!-- ./card-body-->
-          </div><!-- ./card-->  
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <?php
-   include ('partials/footer.php');
-  ?>
-</div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+								</p>
+						</div>
+				</div>
+				
+				<!-- Page Image Bg -->
+				<div class="ClsPageImage2">
+					<div class="ClsContainer">
+						<div class="row">
+							<div class="col col1">
+									<h1>Your tasks all in one place!</h1>
+									<p>WEBSITE NAME has tools that you can use to organize all of your schedule</p>
+									
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+				<!-- Dev Cards -->
+				<div class="DevCards">
+						<div class="ClsContainer">
+							<h1 class="PTitle">Meet the Team</h1>
+								<div class="row">
+												
+										<div class="col col2">
+												<div class="DevCardContainer">
+														<form id="DevFront">
+														<div class="DevImg">
+																	<img src="images/Rian.webp">
+														</div>
+														
+														<!-- Dev Name -->
+														<h4>Rian Carlo Reyes</h4>
+														<!-- role -->
+														<small>Lead Developer</small>
+														<br>
+														<br>
+														<!-- quote -->
+														<div class="quote">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														</div>
+														<div class="InfoEmail">
+														<p>email1@gmail.com</p>
+														</div>
+														</form>
+												</div>
+										</div>
+										
+										<div class="col col2">
+												<div class="DevCardContainer">
+														<form id="DevFront">
+														<div class="DevImg">
+																	<img src="images/CalBG.jpg">
+														</div>
+														
+														<!-- Dev Name -->
+														<h4>Elmer Cuenca</h4>
+														<!-- role -->
+														<small>Lead Front-End Programmer</small>
+														<br>
+														<br>
+														<!-- quote -->
+														<div class="quote">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														</div>
+														<div class="InfoEmail">
+														<p>email1@gmail.com</p>
+														</div>
+														</form>
+													</div>
+										</div>
+										
+										<div class="col col2">
+												<div class="DevCardContainer">
+														<form id="DevFront">
+														<div class="DevImg">
+																	<img src="images/JoshIan.JPG">
+														</div>
+														
+														<!-- Dev Name -->
+														<h4>Joshua Ian Española</h4>
+														<!-- role -->
+														<small>Fron-End Programmer</small>
+														<br>
+														<br>
+														<!-- quote -->
+														<div class="quote">
+														<p>Programming is an art that can make a programmer experience a wide spectrum of grief</p>
+														</div>
+														<div class="InfoEmail">
+														<p>email1@gmail.com</p>
+														</div>
+														</form>
+											</div>
+										</div>
+										
+										<div class="col col2">
+												<div class="DevCardContainer">
+														<form id="DevFront">
+														<div class="DevImg">
+																	<img src="images/Bis.webp">
+														</div>
+														
+														<!-- Dev Name -->
+														<h4>Bismillah Constantino</h4>
+														<!-- role -->
+														<small>Back-End Programmer</small>
+														<br>
+														<br>
+														<!-- quote -->
+														<div class="quote">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														</div>
+														<div class="InfoEmail">
+														<p>email1@gmail.com</p>
+														</div>
+														</form>
+												</div>
+										</div>
+										
+										<div class="col col2">
+												<div class="DevCardContainer">
+														<form id="DevFront">
+														<div class="DevImg">
+																	<img src="images/Nita.jpeg">
+														</div>
+														
+														<!-- Dev Name -->
+														<h4>Nita Antasuda</h4>
+														<!-- role -->
+														<small>Back-End Programmer</small>
+														<br>
+														<br>
+														<!-- quote -->
+														<div class="quote">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														</div>
+														<div class="InfoEmail">
+														<p>email1@gmail.com</p>
+														</div>
+														</form>
+												</div>
+										</div>
+										
+										<div class="col col2">
+												<div class="DevCardContainer">
+														<form id="DevFront">
+														<div class="DevImg">
+																	<img src="images/Angelo.webp">
+														</div>
+														
+														<!-- Dev Name -->
+														<h4>Angelo Buenaventura</h4>
+														<!-- role -->
+														<small>Back-End Programmer</small>
+														<br>
+														<br>
+														<!-- quote -->
+														<div class="quote">
+														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														</div>
+														<div class="InfoEmail">
+														<p>email1@gmail.com</p>
+														</div>
+														</form>
+												</div>
+										</div>
+										
+								</div>
+						</div>
+				</div>
+				
+				<!-- footer -->
+				<div class="ClsFooter">
+						<div class="ClsContainer">
+								<div class="row">
+										<div class="col FootCol1">
+												<h3>Download the App</h3>
+												<p>Available in the App Store or Play Store</p>
+												
+												<div class="AppLogo">
+														<img src="images/app-store.png" alt="">
+														<img src="images/play-store.png" alt="">
+												</div>
+										</div> <!-- FootCol1 -->
+										
+										<div class="col FootCol2">
+														<!-- Company Logo -->
+														<img src="images/HypnosLogoV2.png">
+										</div> <!-- FootCol2 -->
+										
+										<div class="col FootCol3">
+												<h3>Contact Us</h3>
+												<ul>
+													<li>Email1@gmail.com</li>
+													<li>Email2@gmail.com</li>
+													<li>Email3@gmail.com</li>
+													<li>Email4@gmail.com</li>
+													<li>Email5@gmail.com</li>
+													<li>Email6@gmsil.com</li>
+												</ul>
+										</div> <!-- FootCol3 -->
+										
+										<div class="col FootCol4">
+												<h3>Follow Us</h3>
+												<ul>
+													<li>Facebook</li>
+													<li>Github</li>
+													<li>Twitter</li>
+													<li>Youtube</li>
+												</ul>
+										</div> <!-- FootCol4 -->
+								</div> <!-- FootRow -->
+								<hr>
+								<p>Copyright 2021 - SYMPU Co. Ltd</p>
+						</div> <!-- ClsContainer -->
+				</div> <!-- ClsFooter -->
+				
 </body>
 </html>
