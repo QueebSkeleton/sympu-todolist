@@ -291,6 +291,6 @@
   $insert_stmt -> close();
   $mysqli -> close();
 
-  die("<html><body><script>alert('A schedule has been generated for your tasks. Redirecting you to the calendar.'); ".
-    "window.location.replace('schedule-calendar.php');</script></body></html>");
+  echo "<html><body><script>alert('A schedule has been generated for your tasks. Redirecting you to the calendar.'); ".
+    "window.location.replace('schedule-calendar.php');</script></body></html>";
 ?>
