@@ -23,7 +23,7 @@
 								<div class="ClsLogo">
 												
 												<!-- Website Logo -->
-												<img src="Images/HypnosLogoV2.png" width="125px">
+												<img src="Images/sympu-todolist.png" width="225px">
 								</div>
 							  <nav>
 							  				<ul id="MenuButtons">
@@ -45,7 +45,6 @@
 									<h1>We value your time.</h1>
 									<p>In these trying times, we know your struggles and we are here to help you. Organize and have a control of your time. Collate all your tasks from prominent learning management systems and video meetings. Scheduling has never been easy as this before. Now, Be as efficient and effective person you desired to be.</p>
 									
-									<a href="" class="ClsBtn">Explore &#10148;</a>
 							</div>
 							
 						</div>
@@ -56,7 +55,7 @@
 				<div class="GoalDiv">
 						<div class="ClsContainer">
 								<h1 class="PTitle">Our Goal</h1>
-										<img src="images/GoalIcon.png" width="200px" class="Icon">
+										<img src="images/GoalIcon.png" width="100px" class="Icon">
 								<p>
 										Centralized all tasks and incoming events from different platforms. Enabling you to have a map of all your activities. Empower your game plan with SYMPU To Do List Automated Scheduler. Bring the world to you hands to conquer your tasks and activities. 
 
