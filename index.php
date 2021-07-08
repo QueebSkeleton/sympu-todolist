@@ -5,7 +5,7 @@
 				<meta charset ="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				
-				<title>Landing Page</title>
+				<title> SYMPU To Do List | Scheduling Systen</title>
 				
 				<link rel="stylesheet" href="style.css">
 				
@@ -42,6 +42,8 @@
 					<div class="ClsContainer">
 						<div class="row">
 							<div class="col col1">
+									<h1>We value your time.</h1>
+									<p>In these trying times, we know your struggles and we are here to help you. Organize and have a control of your time. Collate all your tasks from prominent learning management systems and video meetings. Scheduling has never been easy as this before. Now, Be as efficient and effective person you desired to be.</p>
 									
 							</div>
 							
@@ -55,8 +57,9 @@
 								<h1 class="PTitle">Our Goal</h1>
 										<img src="images/GoalIcon.png" width="100px" class="Icon">
 								<p>
-									    Our main objective is to make a centralized program where users can collect and organize all incoming events (incoming online meetings, online quizzes, activities, etc.) from different platforms, and enable users to follow a generated and suggested schedule for performing the tasks. Our website is specifically tailored for students, especially those who are in an online mode of learning but nevertheless, it can be used by anybody who is interested.
+										Centralized all tasks and incoming events from different platforms. Enabling you to have a map of all your activities. Empower your game plan with SYMPU To Do List Automated Scheduler. Bring the world to you hands to conquer your tasks and activities. 
 
+									    
 								</p>
 						</div>
 				</div>
@@ -67,7 +70,7 @@
 						<div class="row">
 							<div class="col col1">
 									<h1>Your tasks all in one place!</h1>
-									<p>WEBSITE NAME has tools that you can use to organize all of your schedule</p>
+									<p>SYMPU To Do List has tools that you can use to organize all of your schedule. Featuring a suggetive automated scheduler to empower your work time.</p>
 									
 							</div>
 							
@@ -96,10 +99,10 @@
 														<br>
 														<!-- quote -->
 														<div class="quote">
-														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														<p> Programming is my passion. Exploring the inner intricacies and understanding of this field is whatI believe makes it a satisfying and difficult road to take. It is worth a million coffee.</p>
 														</div>
 														<div class="InfoEmail">
-														<p>email1@gmail.com</p>
+														<p>queebskeleton@gmail.com</p>
 														</div>
 														</form>
 												</div>
@@ -109,7 +112,7 @@
 												<div class="DevCardContainer">
 														<form id="DevFront">
 														<div class="DevImg">
-																	<img src="images/CalBG.jpg">
+																	<img src="images/El.jpg">
 														</div>
 														
 														<!-- Dev Name -->
@@ -120,10 +123,11 @@
 														<br>
 														<!-- quote -->
 														<div class="quote">
-														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														<p> An act aided with the right commitment and desire will always have a fruitful result. Empowering things I can do right now and have a heart to accept what I can’t. </p>
+ </p>
 														</div>
 														<div class="InfoEmail">
-														<p>email1@gmail.com</p>
+														<p>elmercuenca74@gmail.com</p>
 														</div>
 														</form>
 													</div>
@@ -147,7 +151,7 @@
 														<p>Programming is an art that can make a programmer experience a wide spectrum of grief</p>
 														</div>
 														<div class="InfoEmail">
-														<p>email1@gmail.com</p>
+														<p>joshuaian73@gmail.com</p>
 														</div>
 														</form>
 											</div>
@@ -168,10 +172,10 @@
 														<br>
 														<!-- quote -->
 														<div class="quote">
-														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														<p> Let's live surrounded by the things and people we love. Activities and teachings we value. And as a person who always chooses the best for himself. </p>
 														</div>
 														<div class="InfoEmail">
-														<p>email1@gmail.com</p>
+														<p>biswiluh@gmail.com</p>
 														</div>
 														</form>
 												</div>
@@ -192,10 +196,14 @@
 														<br>
 														<!-- quote -->
 														<div class="quote">
-														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														
+														<p>
+															Only by choosing to do things without expecting anything in return can one easily determine the difference between things embedded with value and those that are not. 
+														</p>
+
 														</div>
 														<div class="InfoEmail">
-														<p>email1@gmail.com</p>
+														<p>nitaantasuda@gmail.com</p>
 														</div>
 														</form>
 												</div>
@@ -216,10 +224,10 @@
 														<br>
 														<!-- quote -->
 														<div class="quote">
-														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, turpis ut rhoncus malesuada, lectus elit lobortis lorem, a luctus lorem augue nec leo. Ut nec nisi dui. Aenean eget mi vel urna finibus consequat nec sed tellus. Morbi ac mattis arcu. </p>
+														<p> Only do things that are worth it. Otherwise, prepare to derail yourself. A person who owns himself will not choose to waste his time on things not determined by his choices. </p>
 														</div>
 														<div class="InfoEmail">
-														<p>email1@gmail.com</p>
+														<p>abuenaventura1115@gmail.com</p>
 														</div>
 														</form>
 												</div>

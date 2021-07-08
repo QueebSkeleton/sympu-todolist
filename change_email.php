@@ -12,11 +12,12 @@ $row = $result->fetch_assoc();
 // then show the data in the form first
 
 
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
+<title> Email | SYMPU-To-Do-List</title>
 
 <?php
 include("partials/head.php");
@@ -64,7 +65,7 @@ include("partials/head.php");
             <form class="form-horizontal" method="POST" action="handlers/change_email_handler.php">
             
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Email</label><?php echo  $row["username"]?>
+                <label class="col-sm-2 col-form-label">Email</label><?php $row["username"] ?>
                 <div class="col-sm-10">
                 </div>
               </div>

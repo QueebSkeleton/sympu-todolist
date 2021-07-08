@@ -1,3 +1,5 @@
+<title>Register | SYMPU-To-Do-List</title>
+
 <?php
 session_start();
 include('partials/head.php');

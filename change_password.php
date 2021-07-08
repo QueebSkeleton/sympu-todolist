@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<title> Password | SYMPU-To-Do-List</title>
+
 <?php
   include("partials/head.php");
 ?>

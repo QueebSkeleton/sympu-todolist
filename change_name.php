@@ -17,10 +17,12 @@ $row = $result->fetch_assoc();
 
 <!DOCTYPE html>
 <html lang="en">
-
+<title> Username | SYMPU-To-Do-List</title>
 <?php
 include("partials/head.php");
 ?>
+
+
 
 <body class="hold-transition sidebar-mini">
 

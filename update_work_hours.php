@@ -11,16 +11,19 @@ $row = $result->fetch_assoc();
 // fetch user from database here using $user_logged_in_email
 // then show the data in the form first
 
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
+<title>Work Hours | SYMPU-To-Do-List</title>
+
 <?php
 include("partials/head.php");
 ?>
+
+
+
 
 <body class="hold-transition sidebar-mini">
 

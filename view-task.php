@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<title>Tasks | SYMPU-To-Do-List</title>
 <?php
+  session_start();
   include("partials/head.php");
 ?>
 
@@ -42,6 +44,7 @@
     <div class="content">
       <!-- PLACE YOUR PAGE CONTENTS HERE -->
       <?php
+
           $servername = "localhost";
           $username = "id16885056_sympu_todolist";
           $password = "9&%?njtn$)HDiz}Q";
