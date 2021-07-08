@@ -11,16 +11,19 @@ $row = $result->fetch_assoc();
 // fetch user from database here using $user_logged_in_email
 // then show the data in the form first
 
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
+<title>Work Hours | SYMPU-To-Do-List</title>
+
 <?php
 include("partials/head.php");
 ?>
+
+
+
 
 <body class="hold-transition sidebar-mini">
 
@@ -71,7 +74,7 @@ include("partials/head.php");
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Update work hours</label>
                 <div class="col-sm-10">
-                  <textarea  name="work_hours" class="form-control" > <?php echo $row['work_hours'] ?></textarea>
+                  <textarea  name="work_hours" class="form-control" > <?php  $row["work_hours"] ?></textarea>
                 </div>
               </div>
               <div class="form-group row">

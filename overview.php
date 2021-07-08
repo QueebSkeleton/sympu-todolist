@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title> Overview | SYMPU-To-Do-List</title>
+<title> Home | SYMPU-To-Do-List</title>
 
 <?php
 session_start();

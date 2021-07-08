@@ -15,9 +15,13 @@ $row = $result->fetch_assoc();
 <!DOCTYPE html>
 <html lang="en">
 
+<title>Profile | SYMPU-To-Do-List</title>
+
 <?php
 include("partials/head.php");
 ?>
+
+
 
 <body class="hold-transition sidebar-mini">
 
