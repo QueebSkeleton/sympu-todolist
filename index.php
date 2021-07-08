@@ -23,7 +23,7 @@
 								<div class="ClsLogo">
 												
 												<!-- Website Logo -->
-												<img src="Images/HypnosLogoV2.png" width="125px">
+												<img src="Images/sympu-todolist.png" width="225px">
 								</div>
 							  <nav>
 							  				<ul id="MenuButtons">
@@ -42,10 +42,7 @@
 					<div class="ClsContainer">
 						<div class="row">
 							<div class="col col1">
-									<h1>Slogan</h1>
-									<p>lorem kdlsiskskksksk kdkmsmsmwmw jjddjdmmw kxkdkwksdnndkdkdkdk kdkdk</p>
 									
-									<a href="" class="ClsBtn">Explore &#10148;</a>
 							</div>
 							
 						</div>
@@ -56,7 +53,7 @@
 				<div class="GoalDiv">
 						<div class="ClsContainer">
 								<h1 class="PTitle">Our Goal</h1>
-										<img src="images/GoalIcon.png" width="200px" class="Icon">
+										<img src="images/GoalIcon.png" width="100px" class="Icon">
 								<p>
 									    Our main objective is to make a centralized program where users can collect and organize all incoming events (incoming online meetings, online quizzes, activities, etc.) from different platforms, and enable users to follow a generated and suggested schedule for performing the tasks. Our website is specifically tailored for students, especially those who are in an online mode of learning but nevertheless, it can be used by anybody who is interested.
 
