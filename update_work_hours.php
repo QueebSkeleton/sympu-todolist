@@ -1,4 +1,4 @@
-<?php  
+<?php
 session_start();
 $user_logged_in_email = $_SESSION['email'];
 #database/config.ini access
@@ -65,7 +65,7 @@ include("partials/head.php");
       	<div class="card-body">
           <div class="tab-pane active" id="settings">
             <form class="form-horizontal" method="POST" action="handlers/workhours_handler.php">
-            
+
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Work hours</label>
                 <div class="col-sm-10">
@@ -74,14 +74,14 @@ include("partials/head.php");
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Update work hours</label>
                 <div class="col-sm-10">
-                  <textarea  name="work_hours" class="form-control" > <?php  $row["work_hours"] ?></textarea>
+                  <textarea  name="work_hours" class="form-control"><?php echo $row['work_hours'] ?></textarea>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
                   <div class="col mb-2">
                   <button type="submit" class="btn btn-danger">Submit</button> <a href="profile.php" class="btn btn-danger">Back</a>
-                 
+
                 </div>
               </div>
             </form>
