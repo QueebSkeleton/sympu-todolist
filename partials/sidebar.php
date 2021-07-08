@@ -52,7 +52,7 @@
         </li>
         <li class="nav-item">
           <a href="add-manual-form.php" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
+            <i class="nav-icon fas fa-plus-circle"></i>
             <p>
               Add Tasks
             </p>
@@ -63,6 +63,14 @@
             <i class="nav-icon fas fa-th"></i>
             <p>
               Automate Schedule
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href= "Logout.php" class="nav-link">
+            <i class="nav-icon fas fa-power-off"></i>
+            <p>
+              Logout
             </p>
           </a>
         </li>
