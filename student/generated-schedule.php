@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- JQVMap -->
   <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -239,7 +241,7 @@
           <?php
             //add database + connect
             $conn = new mysqli($config['db_server'], $config['db_user'], $config['db_password'], $config['db_name']);
-            $stmt = $conn -> prepare("SELECT id, date_assigned, name, type FROM todo WHERE student_username = ? and status = 'PENDING'");
+            $stmt = $conn -> prepare("SELECT date_assigned, name, type FROM todo WHERE student_username = ? and status = 'PENDING'");
             $stmt -> bind_param("s", $_SESSION["email"]);
             $stmt -> execute();
             $result = $stmt -> get_result();
@@ -270,7 +272,6 @@
 
               // add the data in the calendar
               echo "{\n".
-              "id: ".$row["id"].",\n".
               "title          : '".$row["name"].
               "',\n".
               "start          : new Date(".$year.
@@ -295,9 +296,6 @@
             $conn -> close();
           ?>
         ],
-        eventClick: function(info) {
-          window.location.replace("view-task.php?id=" + info.event.id);
-        }
       });
       calendar.render();
       // $('#calendar').fullCalendar()

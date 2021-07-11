@@ -148,6 +148,13 @@
           </div>
         </div>
         <!-- /.card-body -->
+        <div class="card-footer">
+          <?php if($row["status"] == "PENDING"): ?>
+          <a href="actions/finish-task.php?id=<?= $row["id"] ?>" class="btn btn-primary">Done</a>
+          <?php else: ?>
+          <a href="actions/undo-task.php?id=<?= $row["id"] ?>" class="btn btn-warning">Undo</a>
+          <?php endif; ?>
+        </div>
       </div>
       <!-- /.card -->
       <?php
