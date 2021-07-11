@@ -41,6 +41,13 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
 
+  <style>
+  .fc-timegrid-slot {
+    height: 50px; // 1.5em by default
+    border-bottom: 0 !important;
+  }
+  </style>
+
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -62,7 +69,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Calendar</h1>
+              <h1 class="m-0">Your Generated Schedule</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -78,108 +85,22 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="sticky-top mb-3">
-                <!-- LEGEND OF THE TASKS -->
-                <div class="card">
-                  <div class="card-body">
-                    <span class="d-block" style="color:#E77471;font-size: 15.5px;"><i class="fas fa-square"></i> Online Meeting </span>
-                    <span class="d-block" style="color:#00a65a;font-size: 15.5px;"><i class="fas fa-square"></i> Assignment</span>
-                    <span class="d-block" style="color:#f39c12;font-size: 15.5px;"><i class="fas fa-square"></i> Quiz</span>
-                  </div>
-                </div>
-                <!-- THE PENDING TASKS -->
-                <div class="card">
-                  <div class="card-header">
-                    <h4 class="card-title">Pending</h4>
-                  </div>
-                  <div class="card-body">
-                    <div id="external-events">
-                      <?php
-                        $config = parse_ini_file('../../config.ini');
-                        $conn = new mysqli($config['db_server'], $config['db_user'], $config['db_password'], $config['db_name']);
+          <a href="actions/generate-schedule.php" class="btn btn-primary mb-4">Suggest a schedule</a>
 
-                        $date = date('y-m-d h:i:s');
-                        $stmt = $conn->prepare("SELECT name,id FROM todo WHERE student_username = ? and status = 'PENDING' and date_assigned <= ?
-                                ORDER BY date_assigned DESC");
-                        $stmt -> bind_param("ss",$_SESSION["email"],$date);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                      ?>
-                      <ul>
-                        <?php while($row = $result -> fetch_assoc()):?>
-                        <li>
-                          <?="<a href= \"view-task.php?id=". $row["id"] ."\">"?>
-                          <?= $row["name"] ?>
-                          <?="</a>"?>
-                        </li>
-                        <?php endwhile; ?>
-                      </ul>
-                      <?php
-                        $result -> close();
-                        $stmt -> close();
-                        $conn -> close();
-                      ?>
-                    </div><!-- the events-->
-
-                  </div>
-                  <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-
-                <!--THE UPCOMING EVENTS -->
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Upcoming</h3>
-                  </div>
-                  <div class="card-body">
-                    <?php
-                      $conn = new mysqli($config['db_server'], $config['db_user'], $config['db_password'], $config['db_name']);
-
-                      $date = date('y-m-d h:i:s');
-                      $_SESSION["email"];
-
-                      $stmt = $conn->prepare("SELECT name,id FROM todo WHERE student_username = ? and status = 'PENDING' and date_assigned >= ? ORDER BY date_assigned ASC");
-
-                      $stmt -> bind_param("ss",$_SESSION["email"],$date);
-                      $stmt->execute();
-                      $result = $stmt->get_result();
-                    ?>
-                    <ul>
-                      <?php while($row = $result -> fetch_assoc()): ?>
-                      <li>
-                        <?="<a href= \"view-task.php?id=". $row["id"] ."\">"?>
-                        <?= $row["name"] ?>
-                        <?="</a>"?>
-                      </li>
-                      <?php endwhile; ?>
-                    </ul>
-                    <?php
-                      $result -> close();
-                      $stmt -> close();
-                      $conn -> close();
-                    ?>
-                  </div>
-                  <!--card-body-->
-                </div>
-                <!--card-->
-              </div>
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title">
+                <i class="fas fa-calendar"></i>
+                Recommended plan
+              </h6>
             </div>
-            <!-- /.col -->
-            <div class="col-md-9">
-              <div class="card card-primary">
-                <div class="card-body p-0">
-                  <!-- THE CALENDAR -->
-                  <div id="calendar"></div>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
+            <div class="card-body p-0">
+              <!-- THE CALENDAR -->
+              <div id="calendar"></div>
             </div>
-            <!-- /.col -->
+            <!-- /.card-body -->
           </div>
-          <!-- /.row -->
+          <!-- /.card -->
         </div><!-- /.container-fluid -->
       </section>
     </div>
@@ -230,10 +151,11 @@
       var calendarEl = document.getElementById('calendar');
 
       var calendar = new Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          right: 'timeGridWeek'
         },
         themeSystem: 'bootstrap',
         //Random default events
@@ -241,19 +163,19 @@
           <?php
             //add database + connect
             $conn = new mysqli($config['db_server'], $config['db_user'], $config['db_password'], $config['db_name']);
-            $stmt = $conn -> prepare("SELECT date_assigned, name, type FROM todo WHERE student_username = ? and status = 'PENDING'");
-            $stmt -> bind_param("s", $_SESSION["email"]);
-            $stmt -> execute();
-            $result = $stmt -> get_result();
+            $result = $conn -> query("SELECT `generated_todo`.`todo_id`, `generated_todo`.`date_to_perform`, `generated_todo`.`start_time`, `generated_todo`.`end_time`, `todo`.`name`, `todo`.`type` ".
+            "FROM `generated_todo` INNER JOIN `todo` ON `todo`.`id` = `generated_todo`.`todo_id` ".
+            "WHERE `todo`.`student_username` = '".$_SESSION["email"]."' AND `todo`.`status` = 'PENDING'");
 
             while ($row = $result -> fetch_assoc()) {
-              // Get year,month,day,hour,minutes and seconds
-              $year = date("Y", strtotime($row["date_assigned"]));
-              $month = date("m-1", strtotime($row["date_assigned"]));
-              $day = date("d", strtotime($row["date_assigned"]));
-              $hour = date("H", strtotime($row["date_assigned"]));
-              $minutes = date("i", strtotime($row["date_assigned"]));
-              $seconds = date("s", strtotime($row["date_assigned"]));
+              // Get year,month,day,hour,minutes and seconds\
+              $intdate = strtotime($row["date_to_perform"]);
+              $year = date("Y", $intdate);
+              $month = date("m-1", $intdate);
+              $day = date("d", $intdate);
+
+              $start_time = DateTime::createFromFormat('H:i:s', $row["start_time"]);
+              $end_time = DateTime::createFromFormat('H:i:s', $row["end_time"]);
 
               // Corresponding color to different tasks
               if ($row["type"] == "SYNCHRONOUS_MEET") {
@@ -272,14 +194,22 @@
 
               // add the data in the calendar
               echo "{\n".
+              "id: ".$row["todo_id"].",\n".
               "title          : '".$row["name"].
               "',\n".
               "start          : new Date(".$year.
               ",".$month.
               ",".$day.
-              ",".$hour.
-              ",".$minutes.
-              ",".$seconds.
+              ",".$start_time -> format('H').
+              ",".$start_time -> format('i').
+              ",".$start_time -> format('s').
+              "),\n".
+              "end          : new Date(".$year.
+              ",".$month.
+              ",".$day.
+              ",".$end_time -> format('H').
+              ",".$end_time -> format('i').
+              ",".$end_time -> format('s').
               "),\n".
               "backgroundColor: '".$bgcolor.
               "', \n". //this is working
@@ -292,10 +222,12 @@
             }
 
             $result -> close();
-            $stmt -> close();
             $conn -> close();
           ?>
         ],
+        eventClick: function(info) {
+          window.location.replace("view-task.php?id=" + info.event.id + "&callback=your-recommended-schedule");
+        }
       });
       calendar.render();
       // $('#calendar').fullCalendar()

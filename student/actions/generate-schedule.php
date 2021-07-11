@@ -292,5 +292,5 @@
   $mysqli -> close();
 
   echo "<html><body><script>alert('A schedule has been generated for your tasks. Redirecting you to the calendar.'); ".
-    "window.location.replace('../schedule-calendar.php');</script></body></html>";
+    "window.location.replace('../your-recommended-schedule.php');</script></body></html>";
 ?>

@@ -149,11 +149,14 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          <?php if($row["status"] == "PENDING"): ?>
-          <a href="actions/finish-task.php?id=<?= $row["id"] ?>" class="btn btn-primary">Done</a>
-          <?php else: ?>
-          <a href="actions/undo-task.php?id=<?= $row["id"] ?>" class="btn btn-warning">Undo</a>
-          <?php endif; ?>
+          <div class="btn-group">
+            <?php if($row["status"] == "PENDING"): ?>
+            <a href="actions/finish-task.php?id=<?= $row["id"] ?>" class="btn btn-primary"><i class="fas fa-thumbs-up"></i> Done</a>
+            <?php else: ?>
+            <a href="actions/undo-task.php?id=<?= $row["id"] ?>" class="btn btn-danger"><i class="fas fa-undo"></i> Undo</a>
+            <?php endif; ?>
+            <a href="<?= isset($_GET["callback"]) ? $_GET["callback"].".php" : 'dashboard.php' ?>" class="btn btn-warning"><i class="fas fa-reply"></i> Back</a>
+          </div>
         </div>
       </div>
       <!-- /.card -->

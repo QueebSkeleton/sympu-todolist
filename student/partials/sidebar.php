@@ -57,7 +57,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="generated-schedule.php" class="nav-link">
+          <a href="your-recommended-schedule.php" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>
               View Schedule
