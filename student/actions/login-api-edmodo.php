@@ -47,7 +47,7 @@
 
     $task_source = 'EDMODO';
     $task_priority = 0;
-    $task_allocated_time = 40;
+    $task_allocated_time = rand(20, 60);
     $type = $task_types[$type_generated_index];
     $task_due_date = date_format($task_due_date, 'Y-m-d');
     $task_status = 'PENDING';

@@ -25,6 +25,8 @@
   $no_of_tasks_to_generate = rand(5, 15);
   $task_no_start = rand(1, 5);
 
+  date_default_timezone_set("Asia/Manila");
+
   // Create connection to db
   $conn = mysqli_connect($config['db_server'], $config['db_user'], $config['db_password'], $config['db_name']);
 
