@@ -101,7 +101,7 @@
   // If there are no tasks to schedule, redirect back to overview page
   if($todo_result -> num_rows == 0) {
     die("<html><body><script>alert('You have no availble tasks to schedule.'); ".
-    "window.location.replace('overview.php');</script></body></html>");
+    "window.location.replace('../dashboard.php');</script></body></html>");
     // Close connection
     $mysqli -> close();
   }

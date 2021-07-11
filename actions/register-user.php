@@ -11,6 +11,8 @@
   $sql="INSERT INTO student (username,password,first_name,last_name) VALUES ('$email', '$password', '$Fname','$Lname')";
   $connect->query($sql);
 
+  $connect -> close();
+
   echo "<script>alert('Registration success! Please log-in using your saved credentials. Redirecting you back now.');
     window.location.href= '../login.php';
     </script>";

@@ -24,7 +24,7 @@
         <div class="ClsLogo">
 
           <!-- Website Logo -->
-          <img src="Images/sympu-todolist.png" width="225px">
+          <img src="images/sympu-todolist.png" width="225px">
         </div>
         <nav>
           <ul id="MenuButtons">

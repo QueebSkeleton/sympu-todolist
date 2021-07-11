@@ -20,17 +20,15 @@
 
   	if ($email==$final['username'] AND $password==$final['password']) {
       $_SESSION['email'] = $final['username'];
-      $sql->close();
       $results->close();
-      $final->close();
+      $connect->close();
       die("<script>alert('Successfully logged in.');
         window.location.href='student/dashboard.php'</script>");
   	} else{
-      $sql->close();
       $results->close();
-      $final->close();
+      $connect->close();
       die("<script>alert('Credentials are invalid. Please make sure that your credentials are correct. ');
-      window.location.href='user_login.php'</script>");
+      window.location.href='login.php'</script>");
   	}
   }
 ?>
@@ -104,7 +102,7 @@
         <div class="ClsLogo">
 
           <!-- Website Logo -->
-          <img src="Images/sympu-todolist.png" width="225px">
+          <img src="images/sympu-todolist.png" width="225px">
         </div>
         <nav>
           <ul id="MenuButtons">
