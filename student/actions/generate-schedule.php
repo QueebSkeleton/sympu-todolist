@@ -36,6 +36,13 @@
     public $remaining_work_minutes;
   }
 
+  // Calculate minutes for a time table
+  function calculate_remaining_work_minutes($time_table) {
+    $date_diff = $time_table -> end_time -> diff($time_table -> start_time);
+    $time_table -> remaining_work_minutes = ($date_diff -> h) * 60;
+    $time_table -> remaining_work_minutes += $date_diff -> i;
+  }
+
   // Get logged in user's email
   $logged_in_email = $_SESSION["email"];
 
@@ -96,7 +103,8 @@
   // Fetch all pending assignments of logged in user
   $todo_result = $mysqli -> query("SELECT `id`, `priority`, `date_assigned`, ".
     " `time_allotment` FROM `todo` WHERE `student_username` = '$logged_in_email' ".
-    " AND `type` = 'ASSIGNMENT' AND `status` = 'PENDING' AND DATE(`date_assigned`) >= '".$date_time_now -> format("Y-m-d")."'");
+    " AND `type` = 'ASSIGNMENT' AND `status` = 'PENDING' AND DATE(`date_assigned`) >= '".$date_time_now -> format("Y-m-d")."' ".
+    " ORDER BY `date_assigned` ASC, `priority` ASC");
 
   // If there are no tasks to schedule, redirect back to overview page
   if($todo_result -> num_rows == 0) {
@@ -116,27 +124,32 @@
     $todo -> time_allotment = intval($row["time_allotment"]);
     $todo_list[] = $todo;
   }
+
+  $to_skip_result = $mysqli -> query("SELECT `id`, `date_assigned`, ".
+    " `time_allotment` FROM `todo` WHERE `student_username` = '$logged_in_email' ".
+    " AND `type` != 'ASSIGNMENT' AND DATE(`date_assigned`) >= '".$date_time_now -> format("Y-m-d")."' ".
+    " ORDER BY `date_assigned` ASC");
+  // Fetch all non-assignments of user then Parse all rows into an array of Todo objects
+  $to_skip_list = [];
+  while($row = $to_skip_result -> fetch_assoc()) {
+    $todo = new Todo();
+    $todo -> id = intval($row["id"]);
+    $todo -> date_assigned = new DateTime($row["date_assigned"]);
+    $todo -> time_allotment = intval($row["time_allotment"]);
+    $to_skip_list[] = $todo;
+  }
+
   // Close connection
   $mysqli -> close();
 
   // START: Generator Greedy Algorithm
-
-  // Sort tasks by due date first
-  usort($todo_list, function($a, $b) {
-    if($a -> date_assigned < $b -> date_assigned) return -1;
-    else if($a -> date_assigned == $b -> date_assigned) {
-      return $b -> priority - $a -> priority;
-    }
-    else return 1;
-  });
 
   // Get last todo deadline
   $todo_list_size = count($todo_list);
   $last_todo_deadline = $todo_list[$todo_list_size - 1] -> date_assigned;
   // Get number of days from current day to last todo deadline
   $number_of_days_current_to_last =
-    $last_todo_deadline -> diff($date_time_now) -> d + 1;
-
+  $last_todo_deadline -> diff($date_time_now) -> d + 1;
 
   /*
   // Output all todo
@@ -160,14 +173,103 @@
     $knapsack -> date = clone $date_time_now;
     $knapsack -> date -> modify("+".$i." day");
 
+    // Filter to_skip_list based on items today
+    $to_skip_today = [];
+
+    for($current_toskiparr_index = 0; $current_toskiparr_index < count($to_skip_list);) {
+      $to_skip_item = $to_skip_list[$current_toskiparr_index];
+
+      if($to_skip_item -> date_assigned -> format('Y-m-d') == $knapsack -> date -> format('Y-m-d')) {
+        $to_skip_today[] = $to_skip_item;
+        unset($to_skip_list[$current_toskiparr_index]);
+        $to_skip_list = array_values($to_skip_list);
+      } else {
+        break;
+      }
+    }
+
     // Generate timetables for this knapsack, used later
+    // Trim the timetables based on to skip items
     $knapsack -> time_tables = [];
+
     foreach($time_tables as $time_table) {
-      $knapsack -> time_tables[] = clone $time_table;
+      // Placeholder of timetable(s) generated
+      $generated_time_tables = [];
+      // Clone the current timetable, place it in placeholder
+      $first_time_table = new TimeTable();
+      $first_time_table -> start_time = (clone $time_table -> start_time) -> setDate(intval($knapsack -> date -> format('Y')), intval($knapsack -> date -> format('m')), intval($knapsack -> date -> format('d')));
+      $first_time_table -> end_time = clone $time_table -> end_time -> setDate(intval($knapsack -> date -> format('Y')), intval($knapsack -> date -> format('m')), intval($knapsack -> date -> format('d')));
+      $first_time_table -> remaining_work_minutes = $time_table -> remaining_work_minutes;
+      $generated_time_tables[] = $first_time_table;
+
+      // Check each to skip item today
+      foreach($to_skip_today as $to_skip_item) {
+
+        $to_skip_item_end_time = (clone ($to_skip_item -> date_assigned)) ->
+          modify("+".$to_skip_item -> time_allotment." minutes");
+
+        $current_generated_timetables_index = 0;
+        while($current_generated_timetables_index < count($generated_time_tables)) {
+
+          $current_generated_timetable = $generated_time_tables[$current_generated_timetables_index];
+
+          // First and Second Case - if item time frame is out of the timetable's time frame, then ignore.
+          if($to_skip_item_end_time < $current_generated_timetable -> start_time ||
+            $to_skip_item -> date_assigned > $current_generated_timetable -> end_time) {
+            $current_generated_timetables_index++;
+
+            continue;
+          }
+
+          // Third case - if the time frame is eating the whole timetable, remove the timetable overall.
+          else if($to_skip_item -> date_assigned <= $current_generated_timetable -> start_time &&
+            $to_skip_item_end_time >= $current_generated_timetable -> end_time) {
+            unset($generated_time_tables[$current_generated_timetables_index]);
+            $generated_time_tables = array_values($generated_time_tables);
+          }
+
+          // Fourth case - if the time frame overlaps a portion on the left, partition the right side.
+          else if($to_skip_item -> date_assigned <= $current_generated_timetable -> start_time &&
+            $to_skip_item_end_time < $current_generated_timetable -> end_time) {
+
+            $current_generated_timetable -> start_time = $to_skip_item_end_time;
+            calculate_remaining_work_minutes($current_generated_timetable);
+            $current_generated_timetables_index++;
+          }
+
+          // Fifth case - if the time frame overlaps a portion on the right, partition the right side.
+          else if($to_skip_item -> date_assigned > $current_generated_timetable -> start_time &&
+            $to_skip_item_end_time >= $current_generated_timetable -> end_time) {
+
+            $current_generated_timetable -> end_time = $to_skip_item -> start_time;
+            calculate_remaining_work_minutes($current_generated_timetable);
+            $current_generated_timetables_index++;
+          }
+
+          // Last case - if the time frame lies in the middle, split the timetable into two.
+          else {
+            $second_partition_time_table = new TimeTable();
+            $second_partition_time_table -> start_time = clone $to_skip_item_end_time;
+            $second_partition_time_table -> end_time = clone $current_generated_timetable -> end_time;
+            calculate_remaining_work_minutes($second_partition_time_table);
+            $generated_time_tables[] = $second_partition_time_table;
+
+            $current_generated_timetable -> end_time = $to_skip_item -> date_assigned;
+            calculate_remaining_work_minutes($current_generated_timetable);
+            $current_generated_timetables_index++;
+          }
+        }
+      }
+
+      $knapsack -> time_tables = array_merge($knapsack -> time_tables, $generated_time_tables);
     }
 
     // Placeholder to keep track while adding todo
-    $knapsack -> remaining_work_minutes = $total_work_minutes;
+    $knapsack -> remaining_work_minutes = 0;
+    foreach($knapsack -> time_tables as $time_table) {
+      $knapsack -> remaining_work_minutes += $time_table -> remaining_work_minutes;
+    }
+
     // Array of all todo to assign to this knapsack
     $knapsack -> items = [];
     // Array of all generated todo
@@ -210,28 +312,40 @@
 
   // SECOND HALF: Assign time frames for every knapsack
   foreach($knapsacks as $knapsack) {
+
+    // Clone array of knapsack timetables for "remaining times" reference
+    $knapsack_timetables_original = [];
+    foreach($knapsack -> time_tables as $time_table) {
+      $timetable_original = new TimeTable();
+      $timetable_original -> start_time = clone $time_table -> start_time;
+      $timetable_original -> end_time = clone $time_table -> end_time;
+      $timetable_original -> remaining_work_minutes = $time_table -> remaining_work_minutes;
+      $knapsack_timetables_original[] = $timetable_original;
+    }
+
     foreach($knapsack -> items as $item) {
       $partition_no = 0;
       $remaining_unfilled_time = $item -> time_allotment;
 
-      for($i = 0; $i < count($time_tables); $i++) {
+      for($i = 0; $i < count($knapsack -> time_tables); $i++) {
         if($knapsack -> time_tables[$i] -> remaining_work_minutes >= $remaining_unfilled_time) {
           // Create a generated todo entity
           $generated_todo = new GeneratedTodo();
           $generated_todo -> todo_id = $item -> id;
           $generated_todo -> partition_no = $partition_no;
           $generated_todo -> date_assigned = $knapsack -> date;
-          $offset_minutes = ($time_tables[$i] -> remaining_work_minutes) - ($knapsack -> time_tables[$i] -> remaining_work_minutes);
+
+          $offset_minutes = ($knapsack_timetables_original[$i] -> remaining_work_minutes) - ($knapsack -> time_tables[$i] -> remaining_work_minutes);
           $generated_todo -> start_time = (clone $knapsack -> date) ->
-            setTime(intval($time_tables[$i] -> start_time -> format("H")),
-              intval($time_tables[$i] -> start_time -> format("i"))) -> modify("+".$offset_minutes." minutes");
+            setTime(intval($knapsack_timetables_original[$i] -> start_time -> format("H")),
+              intval($knapsack_timetables_original[$i] -> start_time -> format("i"))) -> modify("+".$offset_minutes." minutes");
           $generated_todo -> end_time = (clone $generated_todo -> start_time) ->
             modify("+".$remaining_unfilled_time." minutes");
 
           // Add this to knapsack generated todo list
           $knapsack -> generated_items[] = $generated_todo;
 
-          // Subtract the timetables with occupied minutes
+          // Subtract the timetable with occupied minutes
           $knapsack -> time_tables[$i] -> remaining_work_minutes -= $remaining_unfilled_time;
 
           // Break out of loop since the whole todo is now assigned
@@ -244,10 +358,11 @@
           $generated_todo -> todo_id = $item -> id;
           $generated_todo -> partition_no = $partition_no++;
           $generated_todo -> date_assigned = $knapsack -> date;
-          $offset_minutes = ($time_tables[$i] -> remaining_work_minutes) - ($knapsack -> time_tables[$i] -> remaining_work_minutes);
+
+          $offset_minutes = ($knapsack_timetables_original[$i] -> remaining_work_minutes) - ($knapsack -> time_tables[$i] -> remaining_work_minutes);
           $generated_todo -> start_time = (clone $knapsack -> date) ->
-            setTime(intval($time_tables[$i] -> start_time -> format("H")),
-              intval($time_tables[$i] -> start_time -> format("i"))) -> modify("+".$offset_minutes." minutes");
+            setTime(intval($knapsack_timetables_original[$i] -> start_time -> format("H")),
+              intval($knapsack_timetables_original[$i] -> start_time -> format("i"))) -> modify("+".$offset_minutes." minutes");
           $generated_todo -> end_time = (clone $generated_todo -> start_time) ->
             modify("+".$knapsack -> time_tables[$i] -> remaining_work_minutes." minutes");
 

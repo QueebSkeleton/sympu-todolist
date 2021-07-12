@@ -42,14 +42,14 @@
     $task_name = $subjects[$subject_generated_index]." ".$task_type_name[$type_generated_index]." #".($task_no_start++);
     $task_description = "<p>Task is imported from: <span class='badge badge-warning'>Edmodo</span><br>This task is auto-generated. Actual data will be fetched from real sources, but will be implemented soon when resources are available.";
 
-    $task_due_date = new DateTime('now');
+    $task_due_date = (new DateTime('now')) -> setTime(rand(6,15), rand(0,59));
     date_add($task_due_date, date_interval_create_from_date_string(rand(0, 10)." days"));
 
     $task_source = 'EDMODO';
     $task_priority = 0;
     $task_allocated_time = rand(20, 60);
     $type = $task_types[$type_generated_index];
-    $task_due_date = date_format($task_due_date, 'Y-m-d');
+    $task_due_date = date_format($task_due_date, 'Y-m-d H:i:s');
     $task_status = 'PENDING';
 
     mysqli_stmt_execute($insert_stmt);

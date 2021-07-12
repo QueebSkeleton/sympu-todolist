@@ -162,12 +162,13 @@
         events: [
           <?php
             //add database + connect
+            date_default_timezone_set("Asia/Manila");
             $conn = new mysqli($config['db_server'], $config['db_user'], $config['db_password'], $config['db_name']);
-            $result = $conn -> query("SELECT `generated_todo`.`todo_id`, `generated_todo`.`date_to_perform`, `generated_todo`.`start_time`, `generated_todo`.`end_time`, `todo`.`name`, `todo`.`type` ".
+            $generated_todo_result = $conn -> query("SELECT `generated_todo`.`todo_id`, `generated_todo`.`date_to_perform`, `generated_todo`.`start_time`, `generated_todo`.`end_time`, `todo`.`name`, `todo`.`type` ".
             "FROM `generated_todo` INNER JOIN `todo` ON `todo`.`id` = `generated_todo`.`todo_id` ".
             "WHERE `todo`.`student_username` = '".$_SESSION["email"]."' AND `todo`.`status` = 'PENDING'");
 
-            while ($row = $result -> fetch_assoc()) {
+            while ($row = $generated_todo_result -> fetch_assoc()) {
               // Get year,month,day,hour,minutes and seconds\
               $intdate = strtotime($row["date_to_perform"]);
               $year = date("Y", $intdate);
@@ -217,11 +218,58 @@
               "', \n".
               "allDay         : false\n".
               "},";
-
-
             }
+            $generated_todo_result -> close();
 
-            $result -> close();
+            $other_todo_result = $conn -> query("SELECT id, date_assigned, time_allotment, name, type FROM todo WHERE student_username = '".$_SESSION["email"]."' AND type != 'ASSIGNMENT'");
+            while ($row = $other_todo_result -> fetch_assoc()) {
+              // Get year,month,day,hour,minutes and seconds
+              $start_time = DateTime::createFromFormat('Y-m-d H:i:s', $row["date_assigned"]);
+              $end_time = (clone $start_time) -> modify("+".$row["time_allotment"]." minutes");
+
+              // Corresponding color to different tasks
+              if ($row["type"] == "SYNCHRONOUS_MEET") {
+                //Storing colors
+                $bgcolor = "#E77471"; //pink coral
+                $bdcolor = " #E77471";
+              } else if ($row["type"] == "QUIZ") {
+                //Storing colors
+                $bgcolor = "#f39c12"; //yellow
+                $bdcolor = "#f39c12";
+              } else if ($row["type"] == "ASSIGNMENT") {
+                //Storing colors
+                $bgcolor = "#00a65a"; // green
+                $bdcolor = "#00a65a";
+              }
+
+              // add the data in the calendar
+              echo "{\n".
+              "id: ".$row["id"].",\n".
+              "title          : '".$row["name"].
+              "',\n".
+              "start          : new Date(".$start_time -> format('Y').
+              ",".$start_time -> format('m-1').
+              ",".$start_time -> format('d').
+              ",".$start_time -> format('H').
+              ",".$start_time -> format('i').
+              ",".$start_time -> format('s').
+              "),\n".
+              "end          : new Date(".$end_time -> format('Y').
+              ",".$end_time -> format('m-1').
+              ",".$end_time -> format('d').
+              ",".$end_time -> format('H').
+              ",".$end_time -> format('i').
+              ",".$end_time -> format('s').
+              "),\n".
+              "backgroundColor: '".$bgcolor.
+              "', \n". //this is working
+              "borderColor    : '".$bdcolor.
+              "', \n".
+              "allDay         : false\n".
+              "},";
+            }
+            $other_todo_result -> close();
+
             $conn -> close();
           ?>
         ],
